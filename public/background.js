@@ -49,10 +49,3 @@ chrome.runtime.onMessage.addListener((request, _sender) => {
   return promise
 })
 
-try {
-  if (chrome.runtime.setUninstallURL) {
-    chrome.runtime.setUninstallURL('https://github.com/MohamedElashri/DevTab')
-  }
-} catch (e) {
-  // Ignore
-}

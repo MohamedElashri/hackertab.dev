@@ -3,7 +3,7 @@ import { ExtractFnReturnType, QueryConfig } from 'src/lib/react-query'
 import { Version } from '../types'
 
 const getVersions = async (): Promise<Version[]> => {
-  const res = await fetch('https://api.github.com/repos/medyo/hackertab.dev/releases')
+  const res = await fetch('https://api.github.com/repos/MohamedElashri/DevTab/releases')
   if (!res.ok) {
     throw new Error('Failed to fetch versions')
   }

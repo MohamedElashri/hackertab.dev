@@ -128,8 +128,8 @@ export const HelloTab = () => {
   return (
     <div>
       <div className="tabHeader">
-        <h1 className="tabTitle">👋 Let’s set up your Hackertab</h1>
-        <p className="tabBody">Select your developer role 👨🏻‍💻 to personalize your Hackertab.</p>
+        <h1 className="tabTitle">👋 Let’s set up your DevTab</h1>
+        <p className="tabBody">Select your developer role 👨🏻‍💻 to personalize your DevTab.</p>
       </div>
       <div className="occupations">
         {OCCUPATIONS.map((occ) => {

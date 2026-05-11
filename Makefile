@@ -1,4 +1,4 @@
-# Hackertab.dev Personal Fork — Makefile
+# DevTab — Makefile
 # Targets for testing, building, and releasing the Firefox extension.
 
 .PHONY: all install dev typecheck build package release clean help
@@ -24,7 +24,7 @@ all: clean install typecheck build package
 # Help
 # ---------------------------------------------------------------------------
 help:
-	@echo "Hackertab.dev Personal Fork — Makefile targets"
+	@echo "DevTab — Makefile targets"
 	@echo ""
 	@echo "  make install        Install dependencies"
 	@echo "  make dev            Start the Vite dev server"

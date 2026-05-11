@@ -34,7 +34,7 @@ export async function hasExtensionPermissions(): Promise<boolean> {
   return new Promise<boolean>((resolve) => {
     permissionsApi.contains({ origins: HOST_ORIGINS }, (result: boolean) => {
       if (runtime.lastError) {
-        console.warn('[Hackertab] permissions.contains error:', runtime.lastError.message)
+        console.warn('[DevTab] permissions.contains error:', runtime.lastError.message)
         resolve(false)
         return
       }
@@ -51,18 +51,18 @@ export async function requestExtensionPermissions(): Promise<boolean> {
   const permissionsApi = getPermissionsApi()
   const runtime = getRuntime()
   if (!permissionsApi || !runtime?.id) {
-    console.warn('[Hackertab] permissions API not available')
+    console.warn('[DevTab] permissions API not available')
     return false
   }
 
   return new Promise<boolean>((resolve) => {
     permissionsApi.request({ origins: HOST_ORIGINS }, (result: boolean) => {
       if (runtime.lastError) {
-        console.warn('[Hackertab] permissions.request error:', runtime.lastError.message)
+        console.warn('[DevTab] permissions.request error:', runtime.lastError.message)
         resolve(false)
         return
       }
-      console.log('[Hackertab] host permissions granted:', result)
+      console.log('[DevTab] host permissions granted:', result)
       resolve(result)
     })
   })

@@ -36,7 +36,7 @@ chrome.runtime.onMessage.addListener((request, _sender) => {
     .catch((err) => {
       clearTimeout(timeoutId)
       const errMsg = err?.message || String(err)
-      console.error('[Hackertab BG Proxy] fetch failed:', request.url, errMsg, err?.name || '')
+      console.error('[DevTab BG Proxy] fetch failed:', request.url, errMsg, err?.name || '')
       return {
         ok: false,
         status: 0,
@@ -51,7 +51,7 @@ chrome.runtime.onMessage.addListener((request, _sender) => {
 
 try {
   if (chrome.runtime.setUninstallURL) {
-    chrome.runtime.setUninstallURL('https://github.com/medyo/hackertab.dev')
+    chrome.runtime.setUninstallURL('https://github.com/MohamedElashri/DevTab')
   }
 } catch (e) {
   // Ignore

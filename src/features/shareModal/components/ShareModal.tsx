@@ -34,7 +34,7 @@ const sharingButtons = [
     component: TwitterShareButton,
     icon: TwitterIcon,
     name: 'twitter',
-    body: `via @hackertabdev`,
+    body: `via @devtab`,
   },
   { component: RedditShareButton, icon: RedditIcon, name: 'reddit' },
   { component: LinkedinShareButton, icon: LinkedinIcon, name: 'linkedin' },

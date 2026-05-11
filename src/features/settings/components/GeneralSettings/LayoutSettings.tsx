@@ -75,7 +75,7 @@ export const LayoutSettings = () => {
               isClearable={false}
               isSearchable={false}
               defaultValue={getDefaultValue()}
-              classNamePrefix={'hackertab'}
+              classNamePrefix={'devtab'}
               onChange={onPeriodSelect}
             />
           </div>

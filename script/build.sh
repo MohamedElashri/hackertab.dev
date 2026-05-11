@@ -1,7 +1,7 @@
 #!/bin/bash
 
 build() {
-    echo 'Building Hackertab...'
+    echo 'Building DevTab...'
     rm -rf dist
     npx vite build "$@"
 }

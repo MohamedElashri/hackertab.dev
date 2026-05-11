@@ -6,7 +6,7 @@ import { MdDoDisturbOff } from 'react-icons/md'
 import { RiDashboardHorizontalFill } from 'react-icons/ri'
 import { TfiLayoutColumn4Alt } from 'react-icons/tfi'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import HackertabLogo from 'src/assets/logo.svg?react'
+import DevTabLogo from 'src/assets/logo.svg?react'
 import { UserTags } from 'src/components/Elements/UserTags'
 import { Changelog } from 'src/features/changelog'
 import { useUserPreferences } from 'src/stores/preferences'
@@ -61,7 +61,7 @@ export const Header = () => {
             <CgTab />
           </i>{' '}
           <Link to="/">
-            <HackertabLogo aria-label="hackertab.dev" className="logoText" />
+            <DevTabLogo aria-label="devtab" className="logoText" />
           </Link>
           <Changelog />
         </span>

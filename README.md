@@ -1,47 +1,47 @@
-# Hackertab.dev — Personal Fork
+# DevTab
 
-This is a **personal, privacy-focused fork** of [Hackertab.dev](https://github.com/medyo/hackertab.dev). It strips out all telemetry, advertisements, and external backend dependencies for fetching news, and focuses solely on Firefox as the target browser.
+A **personal, privacy-focused** developer news new tab page for Firefox. It shows developer news from GitHub, Hacker News, Lobsters, and Reddit — with no tracking, no ads, and no external backend.
 
-## Differences from upstream
+## What it is
 
-- **No ads or telemetry**: Removed all Amplitude analytics, Sentry error tracking, Firebase authentication, ad banners, and donation prompts.
-- **No external news backend**: Fetches news directly from the original sources instead of proxying through a central server:
-  - GitHub (via public Search API)
-  - Hacker News (via Firebase API)
-  - Lobsters (via public JSON endpoint)
-  - Reddit (via public JSON endpoint)
-- **Sources reduced to four**: Only GitHub, Hacker News, Lobsters, and Reddit are supported. All other sources (DevTo, Medium, Product Hunt, Hashnode, FreeCodeCamp, IndieHackers, Hackernoon, conferences, RSS, AI feed) have been removed.
-- **No referral tracking**: Removed `ref=hackertab.dev` query parameters from all outgoing links.
-- **Firefox-only**: Build scripts and manifest are tailored for Firefox. Chrome support has been removed.
-- **Authentication disabled**: OAuth sign-in and user accounts are disabled.
-- **Static configuration**: Remote configuration for tags is bundled locally so the extension works fully offline after installation.
+DevTab is a fork of [Hackertab.dev](https://github.com/medyo/hackertab.dev) stripped down to the essentials:
+
+- **No ads or telemetry**: Removed Amplitude, Sentry, Firebase, ad banners, and donation prompts.
+- **No external news backend**: Fetches directly from the original APIs:
+  - GitHub Search API
+  - Hacker News Firebase API
+  - Lobsters public JSON endpoint
+  - Reddit public JSON endpoint
+- **Only 4 sources**: GitHub, Hacker News, Lobsters, Reddit. Everything else removed.
+- **No referral tracking**: Removed `ref=hackertab.dev` query parameters.
+- **Firefox-only**: Tailored for Firefox MV3. Chrome support removed.
+- **No authentication**: OAuth and user accounts disabled.
+- **Static config**: Tag list bundled locally; works offline after install.
 
 ## Build
 
-This project uses `yarn` and targets Node 18.
+Uses `npm` and targets Node 18.
 
 ```bash
-yarn install
-yarn build:firefox
+npm install
+make package
 ```
 
-The built extension will be packaged as `firefox_extension.zip` in the project root.
+The built extension is packaged as `firefox_extension.zip`.
 
 ## Development
 
 ```bash
-yarn start
+make dev
 ```
-
-Then visit the local dev server URL.
 
 ## Data sources
 
-- [GitHub Trending](https://github.com/trending) (approximated via Search API)
+- [GitHub Trending](https://github.com/trending) (via Search API)
 - [Hacker News](https://news.ycombinator.com)
 - [Lobsters](https://lobste.rs)
 - [Reddit](https://reddit.com)
 
 ## License
 
-Apache 2.0 — See [LICENSE](/LICENSE) for the full license text.
+Apache 2.0 — See [LICENSE](/LICENSE).

@@ -24,7 +24,7 @@ export const AuthModal = ({ showAuth }: AuthModalProps) => {
       onClose={closeAuthModal}
       header={{
         className: 'header',
-        title: 'Join Hackertab',
+        title: 'Join DevTab',
         icon: <IoHeartCircle style={{ fontSize: '1.2em' }} />,
       }}
       className="authModal">

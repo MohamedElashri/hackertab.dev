@@ -8,7 +8,6 @@ import { TfiLayoutColumn4Alt } from 'react-icons/tfi'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import DevTabLogo from 'src/assets/logo.svg?react'
 import { UserTags } from 'src/components/Elements/UserTags'
-import { Changelog } from 'src/features/changelog'
 import { useUserPreferences } from 'src/stores/preferences'
 import { Button, CircleButton } from '../Elements'
 import { SearchEngineBar } from '../Elements/SearchBar/SearchEngineBar'
@@ -63,7 +62,6 @@ export const Header = () => {
           <Link to="/">
             <DevTabLogo aria-label="devtab" className="logoText" />
           </Link>
-          <Changelog />
         </span>
         <SearchEngineBar />
         <div className="buttonsFlex extras mobileOnly">
@@ -90,11 +88,6 @@ export const Header = () => {
           </CircleButton>
           <CircleButton onClick={() => navigate('/settings/bookmarks')}>
             <BsFillBookmarksFill />
-          </CircleButton>
-          <CircleButton
-            className="profileImageContainer"
-            onClick={() => navigate('/settings/general')}>
-            <BsFillGearFill />
           </CircleButton>
         </div>
         {location.pathname === '/' && <UserTags />}

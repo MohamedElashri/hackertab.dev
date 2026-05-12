@@ -1,13 +1,8 @@
-import { useEffect } from 'react'
 import ReactModal from 'react-modal'
 import { HelloTab } from './steps/HelloTab'
 import './steps/tabs.css'
 
 export const OnboardingModal = () => {
-  useEffect(() => {
-    // Onboarding started - no analytics
-  }, [])
-
   return (
     <ReactModal
       isOpen={true}

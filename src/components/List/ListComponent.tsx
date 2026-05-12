@@ -26,7 +26,6 @@ export type ListComponentPropsType<T extends unknown> = {
   renderItem: (item: T, index: number) => React.ReactNode
   placeholder?: React.ReactNode
   header?: React.ReactNode
-  refresh?: boolean
   error?: any
   limit?: number
 }

@@ -12,23 +12,11 @@ export type SelectedCard = {
   type: 'rss' | 'supported'
 }
 
-export type SelectedTag = {
-  label: string
-  value: string
-}
-
-export type SearchEngine = {
-  url: string
-  label: string
-  logo: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
-  className?: string
-}
-
 export type Layout = 'grid' | 'cards'
 export type Theme = 'dark' | 'light'
 export type ListingMode = 'normal' | 'compact'
 
-export type BaseEntry = {
+export type Article = {
   id: string
   url: string
   title: string
@@ -38,33 +26,47 @@ export type BaseEntry = {
   image_url: string
   published_at: number
   description?: string
-}
-
-export type Article = BaseEntry & {
   source: string
   canonical_url?: string
 }
 
-export type Product = BaseEntry & {
-  tagline: string
-  votes_count: number
-  topics: Array<string>
+export type Repository = {
+  id: string
+  url: string
+  title: string
+  tags: Array<string>
+  comments_count: number
+  points_count: number
+  image_url: string
+  published_at: number
+  description?: string
+  technology: string
+  stars_count: number
+  source: string
+  owner: string
+  forks_count: number
+  stars_in_range: number
+  name: string
 }
-export type FeedItem = {
+
+export type ArticleFeedItemData = {
   title: string
   id: string
   url: string
   date: Date
   image: string
   tags: Array<string>
-}
-
-export type ArticleFeedItemData = FeedItem & {
   type: 'post'
   source: string
 }
 
-export type GithubFeedItemData = FeedItem & {
+export type GithubFeedItemData = {
+  title: string
+  id: string
+  url: string
+  date: Date
+  image: string
+  tags: Array<string>
   type: 'github'
   stars: number
   stars_in_range: number
@@ -76,26 +78,6 @@ export type GithubFeedItemData = FeedItem & {
 export type FeedItemData =
   | ArticleFeedItemData
   | GithubFeedItemData
-
-export type Repository = BaseEntry & {
-  technology: string
-  stars_count: number
-  source: string
-  description: string
-  owner: string
-  forks_count: number
-  stars_in_range: number
-  name: string
-}
-
-export type Conference = BaseEntry & {
-  start_date: number
-  end_date: number
-  tags: string[]
-  online: Boolean
-  city?: string
-  country?: string
-}
 
 export type SupportedCardType = {
   value: string
@@ -124,7 +106,7 @@ export type BaseItemPropsType<
   className?: string
   analyticsTag: string
   dateRange?: string
-  selectedTag?: SelectedTag
+  selectedTag?: { label: string; value: string }
 }
 
 export type CardSettingsType = {

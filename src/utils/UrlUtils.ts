@@ -1,11 +1,3 @@
-export const addHttpsProtocol = (url: string): string => {
-  url = decodeURIComponent(url)
-  if (!/^(?:f|ht)tps?:\/\//.test(url)) {
-    url = 'https:' + url
-  }
-  return url
-}
-
 export const isValidURL = (str: string): boolean => {
   var pattern = new RegExp(
     '^(https?:\\/\\/)?' + // protocol
@@ -17,5 +9,3 @@ export const isValidURL = (str: string): boolean => {
   ) // fragment locator
   return !!pattern.test(str)
 }
-
-export const encode = (value: string) => encodeURIComponent(value)

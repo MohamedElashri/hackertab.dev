@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <script src="/startup.js"></script>
 
-    <% if (isWebBuild) { %>
-      <title>DevTab</title>
-      <link rel="manifest" href="/web_manifest.json" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <script src="/startup.js"></script>
+
+  <% if (isWebBuild) { %>
+    <title>DevTab</title>
+    <link rel="manifest" href="/web_manifest.json" />
     <% } else { %>
       <title>New Tab</title>
-    <%}%>
-  </head>
-  <body class="preload">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <script type="module" src="/src/index.tsx"></script>
+      <%}%>
+</head>
 
-  </body>
+<body class="preload">
+  <noscript>You need to enable JavaScript to run this extension.</noscript>
+  <div id="root"></div>
+  <script type="module" src="/src/index.tsx"></script>
+
+</body>
+
 </html>

@@ -20,10 +20,8 @@ function stripCrossorigin() {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const buildTarget = env.VITE_BUILD_TARGET || 'web'
   const manifestPath = path.resolve(__dirname, 'public', 'manifest.json')
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'))
-  const appVersion = manifest.version || '0.0.0'
 
   return {
     base: './',
@@ -75,9 +73,6 @@ export default defineConfig(({ mode }) => {
               '@szhsin/react-menu',
             ],
             utils: [
-              'country-emoji',
-              'htmlparser2',
-              'dompurify',
               'timeago.js',
             ],
           },

@@ -11,7 +11,7 @@ on:
       - '.github/**'
       - '*.md'
       - '.vscode/**'
-      - 'public/base.manifest.json'
+      - 'public/manifest.json'
   workflow_dispatch:
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
       - name: Get manifest version
         id: manifest_version
         run: |
-          version=$(jq -r .version public/base.manifest.json)
+          version=$(jq -r .version public/manifest.json)
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Bump version and push tag
@@ -42,13 +42,13 @@ jobs:
       - name: Update manifest version
         run: |
           new_version=$(echo "${{ steps.tag_version.outputs.new_tag }}" | sed 's/^v//')
-          jq --arg version "$new_version" '.version = $version' public/base.manifest.json > public/base.manifest.json.tmp && mv public/base.manifest.json.tmp public/base.manifest.json
+          jq --arg version "$new_version" '.version = $version' public/manifest.json > public/manifest.json.tmp && mv public/manifest.json.tmp public/manifest.json
 
       - name: Commit manifest changes
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: 'ci: Bump manifest version to ${{ steps.tag_version.outputs.new_tag }}'
-          file_pattern: public/base.manifest.json
+          file_pattern: public/manifest.json
       - name: Tag branch
         run: |
           git config --global user.name "github-actions[bot]"

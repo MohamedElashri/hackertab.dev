@@ -6,12 +6,10 @@ on:
       target:
         description: 'Select the store to deploy to'
         required: true
-        default: 'all'
+        default: 'firefox'
         type: choice
         options:
-          - chrome
           - firefox
-          - all
       dryrun:
         description: 'Run in dry mode without publishing'
         required: true
@@ -19,12 +17,6 @@ on:
         type: boolean
 env:
   VITE_BUILD_TARGET: 'extension'
-  VITE_AMPLITUDE_KEY: ${{ secrets.REACT_APP_AMPLITUDE_KEY }}
-  VITE_AMPLITUDE_URL: ${{ secrets.REACT_APP_AMPLITUDE_URL }}
-  VITE_API_URL: ${{ secrets.API_URL }}
-  VITE_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-  VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
-  VITE_SENTRY_TOKEN: ${{ secrets.VITE_SENTRY_TOKEN }}
 
 jobs:
   build-and-deploy:
@@ -33,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [chrome, firefox]
+        browser: [firefox]
 
     steps:
       - uses: actions/checkout@v6
@@ -49,24 +41,11 @@ jobs:
       - run: yarn install --frozen-lockfile
 
       - name: 'Build Extension'
-        if: ${{ github.event.inputs.target == 'all' || github.event.inputs.target == matrix.browser }}
-        run: yarn build:${{ matrix.browser }}
-
-      - name: '⬆️ Upload to Chrome Web Store'
-        if: ${{ (github.event.inputs.target == 'all' || github.event.inputs.target == 'chrome') && matrix.browser == 'chrome' && github.event.inputs.dryrun == 'false' }}
-        run: >
-          npx chrome-webstore-upload-cli@3 upload 
-          --source chrome_extension.zip 
-          --extension-id ${{ secrets.CHROME_EXTENSION_ID }} 
-          --auto-publish
-        env:
-          EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
-          CLIENT_ID: ${{ secrets.CHROME_EXTENSION_CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CHROME_EXTENSION_CLIENT_SECRET }}
-          REFRESH_TOKEN: ${{ secrets.CHROME_EXTENSION_REFRESH_TOKEN }}
+        if: ${{ github.event.inputs.target == 'firefox' && matrix.browser == 'firefox' }}
+        run: yarn build:firefox
 
       - name: '⬆️ Upload to Firefox Add-on Store'
-        if: ${{ (github.event.inputs.target == 'all' || github.event.inputs.target == 'firefox') && matrix.browser == 'firefox' && github.event.inputs.dryrun == 'false' }}
+        if: ${{ github.event.inputs.target == 'firefox' && matrix.browser == 'firefox' && github.event.inputs.dryrun == 'false' }}
         uses: wdzeng/firefox-addon@v1
         with:
           jwt-issuer: ${{ secrets.WEB_EXT_API_KEY }}

@@ -3,7 +3,6 @@ import {
   DefaultOptions,
   QueryClient,
   UseInfiniteQueryOptions,
-  UseMutationOptions,
   UseQueryOptions,
 } from '@tanstack/react-query'
 import { localStorageAdapter } from 'src/adapters/LocalStorageAdapter'
@@ -39,10 +38,4 @@ export type QueryConfig<QueryFnType extends (...args: any) => any> = Omit<
 export type InfiniteQueryConfig<QueryFnType extends (...args: any) => any> = Omit<
   UseInfiniteQueryOptions<ExtractFnReturnType<QueryFnType>>,
   'queryKey' | 'queryFn' | 'getNextPageParam'
->
-
-export type MutationConfig<MutationFnType extends (...args: any) => any> = UseMutationOptions<
-  ExtractFnReturnType<MutationFnType>,
-  Error,
-  Parameters<MutationFnType>[0]
 >

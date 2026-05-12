@@ -54,10 +54,6 @@ export const ShareModal = ({ showModal, closeModal, shareData }: ShareModalProps
     toast('Link copied to clipboard', { theme: 'defaultToast' })
   }
 
-  const onSocialMediaClicked = (provider: string) => {
-    // Social sharing is handled by react-share; no tracking needed
-    console.log('Share via', provider)
-  }
   return (
     <ReactModal
       isOpen={showModal}
@@ -94,12 +90,11 @@ export const ShareModal = ({ showModal, closeModal, shareData }: ShareModalProps
       <div className="shareOptions">
         <h3>Share via</h3>
         <div className="shareButtons">
-          {sharingButtons.map(({ component: ShareButton, body, icon: Icon, name }, index) => (
+          {sharingButtons.map(({ component: ShareButton, body, icon: Icon }, index) => (
             <ShareButton
               key={index}
               url={link}
-              title={!body ? title : `${title} ${body}`}
-              onClick={() => onSocialMediaClicked(name)}>
+              title={!body ? title : `${title} ${body}`}>
               <Icon size={38} round />
             </ShareButton>
           ))}

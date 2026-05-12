@@ -1,16 +1,5 @@
-// Keys
-export const BUILD_TARGET = (import.meta.env.VITE_BUILD_TARGET as 'web' | 'extension') || 'web'
-
-// Meta
-export const name = 'DevTab'
-export const slogan = 'Developer news in your new tab'
 export const repository = 'https://github.com/MohamedElashri/DevTab'
-export const contactEmail = ''
 export const maxCardsPerRow = 4
-export const supportLink = 'https://github.com/MohamedElashri/DevTab/issues'
-export const changeLogLink = 'https://api.github.com/repos/MohamedElashri/DevTab/releases'
-
-export const LS_PREFERENCES_KEY = 'devTabPrefs'
 export const MAX_ITEMS_PER_CARD = 50
 
 export type DateRangeType = {

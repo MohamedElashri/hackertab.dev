@@ -3,7 +3,6 @@ import { ErrorBoundary } from 'react-error-boundary'
 import 'normalize.css'
 import 'react-simple-toasts/dist/style.css'
 import 'src/assets/index.css'
-import { ConfigurationWrapper } from 'src/features/remoteConfig/'
 import { persister, queryClient } from 'src/lib/react-query'
 import { AppErrorBoundary } from 'src/providers/AppErrorBoundary'
 import { AppRoutes } from './routes/AppRoutes'
@@ -23,9 +22,7 @@ root.render(
     <AppErrorBoundary error={error} resetError={resetErrorBoundary} />
   )}>
     <PersistQueryClientProvider client={queryClient} persistOptions={{ persister: persister }}>
-      <ConfigurationWrapper>
-        <AppRoutes />
-      </ConfigurationWrapper>
+      <AppRoutes />
     </PersistQueryClientProvider>
   </ErrorBoundary>
 )

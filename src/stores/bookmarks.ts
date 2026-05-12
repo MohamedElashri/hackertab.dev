@@ -11,7 +11,6 @@ type BookmarksActions = {
   bookmarkPost: (post: BookmarkedPost) => void
   unbookmarkPost: (post: BookmarkedPost) => void
   initState: (state: BookmarksState) => void
-  clear: () => void
 }
 
 export const useBookmarks = create(
@@ -28,7 +27,6 @@ export const useBookmarks = create(
         })),
       initState: (newState: BookmarksState) =>
         set(() => ({ userBookmarks: newState.userBookmarks })),
-      clear: () => set({ userBookmarks: [] }),
     }),
     {
       name: 'bookmarks_storage',

@@ -58,7 +58,7 @@ export const Feed = () => {
           <PropagateLoader color={'#A9B2BD'} loading={true} size={8} />
         </div>
       )}
-      {isFetchingNextPage && isError && <div>Error while loading more pages</div>}
+      {isError && <div className="errorMsg">Error while loading feed</div>}
     </div>
   )
 }

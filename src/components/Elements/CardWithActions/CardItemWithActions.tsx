@@ -78,7 +78,7 @@ export const CardItemWithActions = ({
   return (
     <div key={item.id} className={clsx('blockRow', { isRead })}>
       <ShareModal
-        showModal={setShareModalData !== undefined}
+        showModal={shareModalData !== undefined}
         closeModal={() => setShareModalData(undefined)}
         shareData={shareModalData}
       />

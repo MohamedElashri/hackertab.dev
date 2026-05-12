@@ -2,7 +2,7 @@ export const repository = 'https://github.com/MohamedElashri/DevTab'
 export const maxCardsPerRow = 4
 export const MAX_ITEMS_PER_CARD = 50
 
-export type DateRangeType = {
+type DateRangeType = {
   value: 'daily' | 'monthly' | 'weekly'
   label: string
 }

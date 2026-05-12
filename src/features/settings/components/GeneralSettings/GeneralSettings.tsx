@@ -14,11 +14,9 @@ export const GeneralSettings = () => {
     openLinksNewTab,
     listingMode,
     theme,
-    maxVisibleCards,
     showReadPosts,
     setTheme,
     setListingMode,
-    setMaxVisibleCards,
     setOpenLinksNewTab,
     setShowReadPosts,
   } = useUserPreferences()

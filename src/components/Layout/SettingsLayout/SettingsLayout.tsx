@@ -1,5 +1,4 @@
 import React from 'react'
-import 'react-contexify/dist/ReactContexify.css'
 import { NavLink, Outlet } from 'react-router-dom'
 import './settings.css'
 

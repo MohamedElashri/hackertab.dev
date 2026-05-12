@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet } from 'react-router'
+import { Outlet } from 'react-router-dom'
 import { BeatLoader } from 'react-spinners'
 import 'src/assets/App.css'
 import { Header } from './Header'

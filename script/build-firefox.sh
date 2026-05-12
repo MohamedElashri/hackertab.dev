@@ -4,7 +4,7 @@ echo 'building extension for Firefox...'
 rm -f firefox_extension.zip
 
 # Build
-yarn build:ext
+npm run build:ext
 
 # Zip the distribution folder
 cd dist/ && zip -r ../firefox_extension.zip * -x "*.DS_Store" "web_manifest.json" "screenshots/*" "images/*" "robots.txt" && cd ..

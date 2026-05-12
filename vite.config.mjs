@@ -35,6 +35,7 @@ export default defineConfig(({ mode }) => {
       sourcemap: false,
       emptyOutDir: true,
       cssCodeSplit: false,
+      modulePreload: false,
       rollupOptions: {
         output: {
           entryFileNames: `assets/[name]-[hash].js`,

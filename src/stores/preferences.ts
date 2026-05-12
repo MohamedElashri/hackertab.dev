@@ -74,7 +74,9 @@ export const useUserPreferences = create(
       ],
       occupation: null,
       layout: 'cards',
-      cardsSettings: {},
+      cardsSettings: {
+        reddit: { language: 'myLangs' },
+      },
       maxVisibleCards: 4,
       theme: 'dark',
       onboardingCompleted: false,

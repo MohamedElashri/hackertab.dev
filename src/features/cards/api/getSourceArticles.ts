@@ -56,35 +56,58 @@ const getArticles = async ({
   }
 
   if (source === 'reddit') {
-    // Normalize tag to a potential subreddit name (remove spaces, lowercase)
-    const rawTag = tags && tags.length > 0 && tags[0] ? tags[0] : ''
-    const normalizedTag = rawTag.replace(/\s+/g, '').toLowerCase()
+    const DEFAULT_TECH_SUBREDDITS = ['programming', 'technology', 'compsci']
 
-    // Only use a subreddit endpoint for clean single-word tags;
-    // otherwise fall back to the global front-page feed.
-    const url = normalizedTag && !rawTag.includes(' ')
-      ? `https://www.reddit.com/r/${normalizedTag}/hot.json?limit=30`
-      : 'https://www.reddit.com/.json?limit=30'
+    const rawTags = tags && tags.length > 0 ? tags.filter((t) => t && t.trim() !== '') : []
 
-    const res = await extensionFetch(url)
-    const data = await res.json()
-    const posts = data?.data?.children || []
-    return posts.map((p: any) => {
-      const d = p.data
-      return {
-        id: d.id,
-        url: d.url || `https://www.reddit.com${d.permalink}`,
-        title: d.title,
-        tags: [d.subreddit],
-        comments_count: d.num_comments || 0,
-        points_count: d.score || 0,
-        image_url: d.thumbnail && d.thumbnail.startsWith('http') ? d.thumbnail : '',
-        published_at: d.created_utc ? d.created_utc * 1000 : Date.now(),
-        description: '',
-        source: 'reddit',
-        canonical_url: `https://www.reddit.com${d.permalink}`,
-      }
+    const subreddits = rawTags.length > 0
+      ? rawTags.map((t) => t.replace(/\s+/g, '').toLowerCase())
+      : DEFAULT_TECH_SUBREDDITS
+
+    const urls = subreddits.map((sub) =>
+      `https://www.reddit.com/r/${sub}/hot.json?limit=30`
+    )
+
+    const results = await Promise.allSettled(
+      urls.map(async (url) => {
+        const res = await extensionFetch(url)
+        const data = await res.json()
+        return data?.data?.children || []
+      })
+    )
+
+    const posts = results
+      .filter((r): r is PromiseFulfilledResult<any[]> => r.status === 'fulfilled')
+      .flatMap((r) => r.value)
+
+    const seen = new Set<string>()
+    const uniquePosts = posts.filter((p: any) => {
+      if (seen.has(p.data.id)) return false
+      seen.add(p.data.id)
+      return true
     })
+
+    const sorted = uniquePosts
+      .map((p: any) => ({
+        data: p.data,
+        score: p.data.score || 0,
+      }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 30)
+
+    return sorted.map(({ data: d }) => ({
+      id: d.id,
+      url: d.url || `https://www.reddit.com${d.permalink}`,
+      title: d.title,
+      tags: [d.subreddit],
+      comments_count: d.num_comments || 0,
+      points_count: d.score || 0,
+      image_url: d.thumbnail && d.thumbnail.startsWith('http') ? d.thumbnail : '',
+      published_at: d.created_utc ? d.created_utc * 1000 : Date.now(),
+      description: '',
+      source: 'reddit',
+      canonical_url: `https://www.reddit.com${d.permalink}`,
+    }))
   }
 
   return []

@@ -335,6 +335,18 @@ a {
   color: #ee802f;
 }
 
+.navigationItem .rss {
+  color: #ee802f;
+}
+
+.maxTitle {
+  margin: 0;
+  max-width: 75%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Actions */
 .blockActions {
   align-items: flex-end;

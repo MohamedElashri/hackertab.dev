@@ -1,4 +1,5 @@
 import React from 'react'
+import { BsRssFill } from 'react-icons/bs'
 import { SUPPORTED_CARDS } from 'src/config/supportedCards'
 import { useUserPreferences } from 'src/stores/preferences'
 import { SelectedCard } from 'src/types'
@@ -9,8 +10,8 @@ type BottomNavigationProps = {
 }
 
 export const BottomNavigation = ({ selectedCard, setSelectedCard }: BottomNavigationProps) => {
-  const { cards } = useUserPreferences()
-  const AVAILABLE_CARDS = [...SUPPORTED_CARDS]
+  const { cards, userCustomCards } = useUserPreferences()
+  const AVAILABLE_CARDS = [...SUPPORTED_CARDS, ...userCustomCards]
   return (
     <div className="bottomNavigation">
       {cards.map((card) => {
@@ -27,7 +28,9 @@ export const BottomNavigation = ({ selectedCard, setSelectedCard }: BottomNaviga
               constantCard.icon
             ) : typeof constantCard?.icon === 'string' ? (
               <img src={constantCard.icon} alt="" />
-            ) : null}
+            ) : (
+              <BsRssFill className="rss" />
+            )}
           </button>
         )
       })}

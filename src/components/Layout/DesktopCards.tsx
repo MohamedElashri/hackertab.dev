@@ -17,6 +17,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { clsx } from 'clsx'
 import { MdOutlineDragIndicator } from 'react-icons/md'
 import { SUPPORTED_CARDS } from 'src/config/supportedCards'
+import { CustomRssCard } from 'src/features/cards'
 import { DesktopBreakpoint } from 'src/providers/DesktopBreakpoint'
 import { useUserPreferences } from 'src/stores/preferences'
 import { SelectedCard, SupportedCardType } from 'src/types'
@@ -36,10 +37,7 @@ const SortableItem = ({ id, card }: SortableItemProps) => {
     transition,
   }
 
-  const Component = card.component
-  if (!Component) {
-    return null
-  }
+  const Component = card.component || CustomRssCard
 
   return (
     <div ref={setNodeRef} style={style}>
@@ -63,8 +61,7 @@ export const DesktopCards = ({
 }: {
   cards: SelectedCard[]
 }) => {
-  const AVAILABLE_CARDS = [...SUPPORTED_CARDS]
-  const { updateCardOrder } = useUserPreferences()
+  const { updateCardOrder, userCustomCards } = useUserPreferences()
   const cardsWrapperRef = useRef<HTMLDivElement>(null)
 
   const sensors = useSensors(
@@ -98,9 +95,11 @@ export const DesktopCards = ({
   }
 
   const memoCards = useMemo(() => {
+    const availableCards = [...SUPPORTED_CARDS, ...userCustomCards]
+
     return cards
       .map((card) => {
-        const constantCard = AVAILABLE_CARDS.find((c) => c.value === card.name)
+        const constantCard = availableCards.find((c) => c.value === card.name)
         if (!constantCard) {
           return null
         }
@@ -111,7 +110,7 @@ export const DesktopCards = ({
         }
       })
       .filter(Boolean) as { id: string; card: SupportedCardType }[]
-  }, [cards])
+  }, [cards, userCustomCards])
 
   return (
     <div ref={cardsWrapperRef} className="Cards HorizontalScroll">

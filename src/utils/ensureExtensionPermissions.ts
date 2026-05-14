@@ -14,6 +14,8 @@ const HOST_ORIGINS = [
   'https://www.reddit.com/*',
 ]
 
+const getOriginPattern = (url: string) => `${new URL(url).origin}/*`
+
 function getPermissionsApi() {
   if (typeof window === 'undefined') return null
   const w = window as any
@@ -63,6 +65,40 @@ export async function requestExtensionPermissions(): Promise<boolean> {
         return
       }
       console.log('[DevTab] host permissions granted:', result)
+      resolve(result)
+    })
+  })
+}
+
+export async function hasHostPermission(url: string): Promise<boolean> {
+  const permissionsApi = getPermissionsApi()
+  const runtime = getRuntime()
+  if (!permissionsApi || !runtime?.id) return true
+
+  return new Promise<boolean>((resolve) => {
+    permissionsApi.contains({ origins: [getOriginPattern(url)] }, (result: boolean) => {
+      if (runtime.lastError) {
+        console.warn('[DevTab] permissions.contains error:', runtime.lastError.message)
+        resolve(false)
+        return
+      }
+      resolve(result)
+    })
+  })
+}
+
+export async function requestHostPermission(url: string): Promise<boolean> {
+  const permissionsApi = getPermissionsApi()
+  const runtime = getRuntime()
+  if (!permissionsApi || !runtime?.id) return true
+
+  return new Promise<boolean>((resolve) => {
+    permissionsApi.request({ origins: [getOriginPattern(url)] }, (result: boolean) => {
+      if (runtime.lastError) {
+        console.warn('[DevTab] permissions.request error:', runtime.lastError.message)
+        resolve(false)
+        return
+      }
       resolve(result)
     })
   })

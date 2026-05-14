@@ -1,6 +1,6 @@
 # DevTab
 
-A **personal, privacy-focused** developer news new tab page for Firefox. It shows developer news from GitHub, Hacker News, Lobsters, and Reddit — with no tracking, no ads, and no external backend.
+A **personal, privacy-focused** developer news new tab page for Firefox. It shows developer news from GitHub, Hacker News, Lobsters, Reddit, and your own RSS feeds — with no tracking, no ads, and no external backend.
 
 ## What it is
 
@@ -12,7 +12,7 @@ DevTab is a fork of [Hackertab.dev](https://github.com/medyo/hackertab.dev) stri
   - Hacker News Firebase API
   - Lobsters public JSON endpoint
   - Reddit public JSON endpoint
-- **Only 4 sources**: GitHub, Hacker News, Lobsters, Reddit. Everything else removed.
+- **Focused sources**: GitHub, Hacker News, Lobsters, Reddit, plus custom RSS feeds. Everything else removed.
 - **No referral tracking**: Removed `ref=hackertab.dev` query parameters.
 - **Firefox-only**: Tailored for Firefox MV3. Chrome support removed.
 - **No authentication**: OAuth and user accounts disabled.
@@ -41,6 +41,7 @@ make dev
 - [Hacker News](https://news.ycombinator.com)
 - [Lobsters](https://lobste.rs)
 - [Reddit](https://reddit.com)
+- Custom RSS or Atom feeds
 
 ## License
 

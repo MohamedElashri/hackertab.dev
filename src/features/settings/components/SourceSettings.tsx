@@ -1,12 +1,14 @@
 import { useMemo, useState } from 'react'
+import { BsRssFill } from 'react-icons/bs'
 import { ChipsSet, ConfirmModal } from 'src/components/Elements'
 import { SettingsContentLayout } from 'src/components/Layout/SettingsContentLayout/SettingsContentLayout'
 import { SUPPORTED_CARDS } from 'src/config/supportedCards'
 import { useUserPreferences } from 'src/stores/preferences'
 import { Option, SelectedCard } from 'src/types'
+import { RssSetting } from './RssSetting'
 
 export const SourceSettings = () => {
-  const { cards, setCards } = useUserPreferences()
+  const { cards, setCards, userCustomCards, setUserCustomCards } = useUserPreferences()
   const [confirmDelete, setConfirmDelete] = useState<{
     showModal: boolean
     option?: Option
@@ -24,8 +26,21 @@ export const SourceSettings = () => {
           icon: source.icon,
         }
       }),
+      ...userCustomCards.map((source) => {
+        return {
+          label: source.label,
+          value: source.value,
+          icon:
+            typeof source.icon === 'string' ? (
+              <img src={source.icon} alt="" />
+            ) : (
+              source.icon || <BsRssFill className="rss" />
+            ),
+          removeable: true,
+        }
+      }),
     ].sort((a, b) => (a.label > b.label ? 1 : -1))
-  }, [])
+  }, [userCustomCards])
 
   return (
     <SettingsContentLayout
@@ -48,6 +63,9 @@ export const SourceSettings = () => {
             }
 
             const newCards = cards.filter((card) => card.name !== confirmDelete.option?.value)
+            setUserCustomCards(
+              userCustomCards.filter((card) => card.value !== confirmDelete.option?.value)
+            )
             setCards(newCards)
             setConfirmDelete({ showModal: false, option: undefined })
           }}
@@ -64,11 +82,15 @@ export const SourceSettings = () => {
 
             const cards = selectedValues
               .map((source, index) => {
-                if (SUPPORTED_CARDS.find((sc) => sc.value === source)) {
+                const card = [...SUPPORTED_CARDS, ...userCustomCards].find(
+                  (sc) => sc.value === source
+                )
+
+                if (card) {
                   return {
                     id: index,
                     name: source,
-                    type: 'supported',
+                    type: card.type,
                   }
                 }
                 return null
@@ -78,6 +100,7 @@ export const SourceSettings = () => {
             setCards(cards)
           }}
         />
+        <RssSetting />
       </>
     </SettingsContentLayout>
   )
